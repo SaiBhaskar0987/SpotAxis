@@ -87,6 +87,7 @@ def contact(request):
         return render(request,'contact.html',{'form_contact':form_contact})
     
 def comingsoon(request):
+    """
     if request.method == 'POST':
         form_request = EarlyAccessForm(request=request,data=request.POST )
         if form_request.is_valid():
@@ -95,6 +96,30 @@ def comingsoon(request):
     else:
         form_request = EarlyAccessForm(request=request)
         return render(request,'comingsoon.html',{'no_header':True, 'no_footer':True, 'form_request':form_request})
+    """
+    if request.method == 'POST':
+        form_request = EarlyAccessForm(request=request, data=request.POST)
+        if form_request.is_valid():
+            form_request.save()
+            return render(request, 'comingsoon.html', {
+                'form_request': EarlyAccessForm(request=request),
+                'no_header': True,
+                'no_footer': True,
+                'success': True
+            })
+        else:
+            return render(request, 'comingsoon.html', {
+                'form_request': form_request,
+                'no_header': True,
+                'no_footer': True
+            })
+    else:
+        return render(request, 'comingsoon.html', {
+            'form_request': EarlyAccessForm(request=request),
+            'no_header': True,
+            'no_footer': True
+        })
+
     
 def job_board(request):
     subdomain_data = subdomain(request)
