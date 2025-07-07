@@ -42,13 +42,13 @@ STATICFILES_DIRS = [
     # Don't forget to use absolute paths, not relative paths.
     '/var/www/demo/trm/TRM/static/',
 ]
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'localhost'
+#EMAIL_PORT = 25
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+#EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL='SpotAxis <no-reply@spotaxis.com>'
 SERVER_EMAIL = 'no-reply@spotaxis.com'
 # EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'

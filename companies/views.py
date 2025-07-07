@@ -165,11 +165,14 @@ def record_company(request):
     assigns company to recruiter with membership updates, and redirects to the company's page.
 
     """
+    if not request.user.is_authenticated:
+        return redirect('auth_login')  # Redirect if not logged in
+
     try:
         recruiter = Recruiter.objects.get(user=request.user, user__is_active=True)
-    except:
-        recruiter=""
-        raise Http404
+    except Recruiter.DoesNotExist:
+        messages.error(request, "You don't have a recruiter profile. Please sign up as a recruiter first.")
+        return redirect('companies_record_recruiter')
     if recruiter.company.all():
         return redirect('companies_company_profile')
     if request.method == 'POST':
@@ -374,9 +377,8 @@ def recruiter_profile(request):
         return redirect(redirect_page)
     try:
         recruiter = Recruiter.objects.get(user=request.user, user__is_active=True)
-    except:
-        recruiter=""
-        return Http404
+    except Recruiter.DoesNotExist:
+        raise Http404("Recruiter not found")
     if request.method == 'POST':
         form_user = BasicUserDataForm(data=request.POST,files=request.FILES, instance=request.user)
         form_user_photo = UserPhotoForm(data=request.POST,files=request.FILES, instance=request.user)
@@ -884,17 +886,20 @@ def vacancies_summary(request, vacancy_status_name=None):
     if not subdomain_data['active_subdomain']:
         raise Http404
         # company = get_object_or_404(Company, user=request.user)
-    if request.user.is_authenticated() and request.user.profile.codename == 'recruiter':
+    #if request.user.is_authenticated and request.user.profile.codename == 'recruiter':
+    if request.user.is_authenticated and hasattr(request.user, 'profile') and request.user.profile and request.user.profile.codename == 'recruiter':
         try:
             recruiter = Recruiter.objects.get(user=request.user, user__is_active=True)
         except:
             return redirect('companies_record_company')
     else:
-        recruiter=None
+        recruiter = None
+
     try:
         company = Company.objects.get(subdomain__slug=subdomain_data['active_subdomain'])
     except:
         raise Http404
+
     if vacancy_status_name and not recruiter:
         raise Http404
 

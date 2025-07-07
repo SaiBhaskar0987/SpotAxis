@@ -108,7 +108,11 @@ class Company(models.Model):
         Returns:
             bool: True if service is included, False otherwise.
         """
-        return self.subscription.price_slab.package.services.filter(codename=service).exists()
+        #return self.subscription.price_slab.package.services.filter(codename=service).exists()
+        subscription = getattr(self, 'subscription', None)
+        if subscription and subscription.price_slab and subscription.price_slab.package:
+            return subscription.price_slab.package.services.filter(codename=service).exists()
+        return False
 
     def active_recruiter_count(self):
         """Returns the count of active recruiters associated with this company."""

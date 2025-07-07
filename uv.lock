@@ -312,6 +312,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c7/3d/4ec51e3816d3bd5959058e210598e819fb86d492d16a19d195a025a64758/django-bootstrap-form-3.4.tar.gz", hash = "sha256:de3f7893e515352834d446c441c0cb861637f92cebbe59d8229469c6cd3dc640", size = 4422, upload-time = "2018-03-15T07:04:42.039Z" }
 
 [[package]]
+name = "django-ckeditor"
+version = "6.7.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "django-js-asset" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/15/6e/7923d3932bcdc6df7deea3d0cc31552144444130e5a2bef669e88c4e8141/django_ckeditor-6.7.3.tar.gz", hash = "sha256:889fd80ee7d368e3c5b828c8dabf8907d56bcad6bf5881f3898416df4f2adfe7", size = 1726851, upload-time = "2025-06-06T10:16:35.748Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d2/03/b2095f13b571ab78b2a3f55d30e2b3f126b3f4f350391037c37c418f7c2f/django_ckeditor-6.7.3-py3-none-any.whl", hash = "sha256:09771c9b8fb33b84bd2767dfc891a24b7fbdb0120910a7ec65b763a4ae6807bb", size = 2455696, upload-time = "2025-06-06T10:16:40.05Z" },
+]
+
+[[package]]
 name = "django-contrib-comments"
 version = "2.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1199,6 +1212,7 @@ dependencies = [
     { name = "datefinder" },
     { name = "django" },
     { name = "django-bootstrap-form" },
+    { name = "django-ckeditor" },
     { name = "django-contrib-comments" },
     { name = "django-crontab" },
     { name = "django-extensions" },
@@ -1254,6 +1268,7 @@ requires-dist = [
     { name = "datefinder", specifier = ">=0.7.3" },
     { name = "django", specifier = ">=5.2.1" },
     { name = "django-bootstrap-form", specifier = ">=3.4" },
+    { name = "django-ckeditor", specifier = ">=6.5.1" },
     { name = "django-contrib-comments", specifier = ">=2.2.0" },
     { name = "django-crontab", specifier = ">=0.7.1" },
     { name = "django-extensions", specifier = ">=4.1" },

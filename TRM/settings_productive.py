@@ -49,13 +49,13 @@ STATICFILES_DIRS = [
     # Don't forget to use absolute paths, not relative paths.
     '/var/www/spotaxis/trm/TRM/static/',
 ]
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'localhost'
+#EMAIL_PORT = 25
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+#EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL='SpotAxis <noreply@mail.spotaxis.com>'
 SERVER_EMAIL = 'SpotAxis <server@mail.spotaxis.com>'
 
@@ -66,7 +66,7 @@ SERVER_EMAIL = 'SpotAxis <server@mail.spotaxis.com>'
 # EMAIL_USE_TLS = True
 
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # SPOTAXIS
 # SOCIAL_AUTH_FACEBOOK_KEY = '1419508698335934'

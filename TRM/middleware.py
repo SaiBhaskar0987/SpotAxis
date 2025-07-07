@@ -56,6 +56,7 @@ class SubdomainMiddleware:
                 subdomain = None
 
         if subdomain:
+            print("✅ Recruiter Subdomain Matched:", subdomain.slug if subdomain else "None")
             set_urlconf(SUBDOMAIN_URLCONF)
             request.urlconf = SUBDOMAIN_URLCONF
         elif fqdn != SITE_SUFFIX.strip('.').strip('/'):
@@ -157,10 +158,16 @@ class ExpiredPlanMiddleware:
             if company_qs:
                 company = company_qs[0]
                 total_recruiters = company.recruiter_set.filter(user__is_active=True).count()
-                permitted_recruiters = (
-                    company.subscription.price_slab.package.free_users +
-                    company.subscription.added_users
-                )
+
+                subscription = getattr(company, 'subscription', None)
+                if subscription:
+                    permitted_recruiters = (
+                        subscription.price_slab.package.free_users +
+                        subscription.added_users
+                    )
+                else:
+                    permitted_recruiters = 999  # 👈 fallback (set high to avoid blocking usage)
+
 
                 if permitted_recruiters > 0 and total_recruiters > permitted_recruiters:
                     safe_urls = {
