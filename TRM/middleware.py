@@ -31,10 +31,11 @@ class SubdomainMiddleware:
 
         subdomain = None
         if len(domain_parts) >= 3 and domain_parts[-2] == 'spotaxis' and domain_parts[-3] == 'demo':
-            if len(domain_parts) > 3:
-                subdomain_slug = domain_parts[0]
-            else:
-                subdomain_slug = None
+            #if len(domain_parts) > 3:
+            #    subdomain_slug = domain_parts[0]
+            #else:
+            #    subdomain_slug = None
+            subdomain_slug = domain_parts[0] if len(domain_parts) > 3 else None
             try:
                 subdomain = Subdomain.objects.get(
                     Q(cname=fqdn) |
@@ -43,10 +44,11 @@ class SubdomainMiddleware:
             except Subdomain.DoesNotExist:
                 subdomain = None
         else:
-            if len(domain_parts) > 2 and ROOT_DOMAIN in fqdn:
-                subdomain_slug = domain_parts[0]
-            else:
-                subdomain_slug = None
+            #if len(domain_parts) > 2 and ROOT_DOMAIN in fqdn:
+            #    subdomain_slug = domain_parts[0]
+            #else:
+            #    subdomain_slug = None
+            subdomain_slug = domain_parts[0] if len(domain_parts) > 2 and ROOT_DOMAIN in fqdn else None
             try:
                 subdomain = Subdomain.objects.get(
                     Q(cname=fqdn) |
@@ -64,7 +66,9 @@ class SubdomainMiddleware:
         response = self.get_response(request)
 
         # Migrate process_response logic here
-        patch_vary_headers(response, ('Host',))
+        from django.http import HttpResponse
+        if isinstance(response, HttpResponse):
+            patch_vary_headers(response, ('Host',))
         return response
 
 

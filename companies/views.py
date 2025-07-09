@@ -374,9 +374,9 @@ def recruiter_profile(request):
         return redirect(redirect_page)
     try:
         recruiter = Recruiter.objects.get(user=request.user, user__is_active=True)
-    except:
+    except Exception as e:
         recruiter=""
-        return Http404
+        raise Http404("Recruiter not found")
     if request.method == 'POST':
         form_user = BasicUserDataForm(data=request.POST,files=request.FILES, instance=request.user)
         form_user_photo = UserPhotoForm(data=request.POST,files=request.FILES, instance=request.user)
@@ -884,7 +884,8 @@ def vacancies_summary(request, vacancy_status_name=None):
     if not subdomain_data['active_subdomain']:
         raise Http404
         # company = get_object_or_404(Company, user=request.user)
-    if request.user.is_authenticated() and request.user.profile.codename == 'recruiter':
+    #if request.user.is_authenticated() and request.user.profile.codename == 'recruiter':
+    if request.user.is_authenticated and hasattr(request.user, 'profile') and request.user.profile and request.user.profile.codename == 'recruiter':
         try:
             recruiter = Recruiter.objects.get(user=request.user, user__is_active=True)
         except:

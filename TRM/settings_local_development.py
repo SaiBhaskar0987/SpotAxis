@@ -13,8 +13,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'TRM_local',                      # Or path to database file if using sqlite3.
-        'USER': 'TRM_USER',                      # Not used with sqlite3.
-        'PASSWORD': 'pass',                  # Not used with sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': '00000',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -44,14 +44,14 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_PATH, 'static'),
 ]
 
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'contact.travelder@gmail.com'
-EMAIL_HOST_PASSWORD = 'qwerty123$'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = 'contact.travelder@gmail.com'
+#EMAIL_HOST_PASSWORD = 'qwerty123$'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL='SpotAxis no-reply@spotaxis.com'
 SERVER_EMAIL = 'no-reply@spotaxis.com'
 
